@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Container, Typography } from '@mui/material';
+import 'fontsource-roboto';
+
+class App extends Component {
+  render() {
+    return (
+      <Container component="article" maxWidth="sm">
+        <Typography variant="h3" component="h1" align="center">Formulário de Cadastro</Typography>
+        <FormularioCadastro aoEnviar={aoEnviarForm} validaCpf={validaCpf} />
+      </Container>
+    );
+  }
+}
+
+function aoEnviarForm(dados) {
+  console.log(dados);
+}
+
+function validaCpf(cpf) {
+  if (cpf.length === 11 || cpf === "") {
+    return {
+      valido: true,
+      texto: ""
+    };
+  }
+  else {
+    return {
+      valido: false,
+      texto: "CPF deve ter 11 dígitos"
+    };
+  }
 }
 
 export default App;
